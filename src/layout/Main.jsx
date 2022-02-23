@@ -7,15 +7,9 @@ class Main extends React.Component {
     }
 
     componentDidMount() {
-        this.getDBMovies();
-        console.log('Mount');
-    }
-
-    getDBMovies = async () => {
-            console.log('fetch');
-            let DBMovies = await fetch('http://www.omdbapi.com/?apikey=78584b3c&s=matrix');
-            DBMovies = await DBMovies.json();
-            this.setState({DBMovies: DBMovies.Search});
+        fetch('http://www.omdbapi.com/?apikey=f898f5b9&s=matrix')
+            .then(response => response.json())
+            .then(data => this.setState({DBMovies: data.Search}))
     }
 
     // Render =================================
@@ -23,10 +17,13 @@ class Main extends React.Component {
         const { DBMovies } = this.state;
         return (
             <main className='container content'>
-                <Movies DBMovies={DBMovies} />
+                {DBMovies.length ?
+                (<Movies DBMovies={DBMovies} />) :
+                <h3>Loading...</h3>
+                }
+                
             </main>
         )
     }
 }
-
 export { Main }
