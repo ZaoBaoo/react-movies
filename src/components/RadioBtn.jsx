@@ -1,11 +1,17 @@
 import React from "react";
 
 class RadioBtn extends React.Component {
+  state = {
+    type: "all",
+  };
+
   handleRadio = (e) => {
+    this.setState({ type: e.target.value });
     this.props.setFilter(e.target.value);
   };
 
   render() {
+    const { type } = this.state;
     return (
       <form className="margin-bottom" action="!#">
         {/* Btn 1 */}
@@ -13,8 +19,9 @@ class RadioBtn extends React.Component {
           <input
             name="group1"
             type="radio"
-            value=""
-            onClick={this.handleRadio}
+            value="all"
+            onChange={this.handleRadio}
+            checked={type === "all"}
           />
           <span>All</span>
         </label>
@@ -24,7 +31,8 @@ class RadioBtn extends React.Component {
             name="group1"
             type="radio"
             value="movie"
-            onClick={this.handleRadio}
+            onChange={this.handleRadio}
+            checked={type === "movie"}
           />
           <span>Only films</span>
         </label>
@@ -34,7 +42,8 @@ class RadioBtn extends React.Component {
             name="group1"
             type="radio"
             value="series"
-            onClick={this.handleRadio}
+            onChange={this.handleRadio}
+            checked={type === "series"}
           />
           <span>Only series</span>
         </label>
