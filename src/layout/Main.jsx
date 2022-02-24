@@ -17,7 +17,7 @@ class Main extends React.Component {
     this.setState({ loading: true });
     if (film) {
       await fetch(
-        `http://www.omdbapi.com/?apikey=${API_KEY}&s=${film}&type=${this.state.typeFilter}`
+        `https://www.omdbapi.com/?apikey=${API_KEY}&s=${film}&type=${this.state.typeFilter}`
       )
         .then((response) => response.json())
         .then((data) => {
