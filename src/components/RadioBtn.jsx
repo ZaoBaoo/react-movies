@@ -34,7 +34,7 @@ class RadioBtn extends React.Component {
             onChange={this.handleRadio}
             checked={type === "movie"}
           />
-          <span>Only films</span>
+          <span>Films</span>
         </label>
         {/* Btn 3 */}
         <label className="margin-right">
@@ -45,7 +45,7 @@ class RadioBtn extends React.Component {
             onChange={this.handleRadio}
             checked={type === "series"}
           />
-          <span>Only series</span>
+          <span>Series</span>
         </label>
       </form>
     );
