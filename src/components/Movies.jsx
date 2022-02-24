@@ -2,14 +2,12 @@ import React from "react";
 import Movie from "./Movie";
 
 function Movies(props) {
-  const { DBMovies } = props;
+  const { DBMovies = [] } = props;
   return (
     <div className="movies">
-      {DBMovies.length ? (
-        DBMovies.map((movie) => <Movie key={movie.imdbID} {...movie} />)
-      ) : (
-        <h4>Nothing found</h4>
-      )}
+      {DBMovies.map((movie) => (
+        <Movie key={movie.imdbID} {...movie} />
+      ))}
     </div>
   );
 }

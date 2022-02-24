@@ -16,6 +16,7 @@ class Main extends React.Component {
   getDBMovies = async (film) => {
     this.setState({ loading: true });
     if (film) {
+      //   debugger;
       await fetch(
         `https://www.omdbapi.com/?apikey=${API_KEY}&s=${film}&type=${this.state.typeFilter}`
       )
@@ -23,6 +24,7 @@ class Main extends React.Component {
         .then((data) => {
           this.setState({ DBMovies: data.Search });
         });
+      //   debugger;
     }
     this.setState({ loading: false });
   };

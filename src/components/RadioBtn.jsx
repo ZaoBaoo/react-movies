@@ -2,7 +2,7 @@ import React from "react";
 
 class RadioBtn extends React.Component {
   state = {
-    type: "all",
+    type: "",
   };
 
   handleRadio = (e) => {
@@ -19,9 +19,9 @@ class RadioBtn extends React.Component {
           <input
             name="group1"
             type="radio"
-            value="all"
+            value=""
             onChange={this.handleRadio}
-            checked={type === "all"}
+            checked={type === ""}
           />
           <span>All</span>
         </label>
