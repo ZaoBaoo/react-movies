@@ -3,20 +3,24 @@ function Movie(props) {
 
     return (
         <>
-            <div className="col s3">
-                <div className="card">
+                <div className="card hoverable">
                     <div className="card-image">
-                        <img className='max-height-img' src={Poster} alt='' />
+                    {/* Проверяем есть ли у фильма картинка для отображения */}
+                    {
+                        Poster === 'N/A' ? 
+                        <img className={`img-max-size' src='https://via.placeholder.com/300x400?text=${Title}`} alt='' />
+                        : 
+                        <img className='img-max-size' src={Poster} alt='' />
+                    }
                     </div>
                     <div className="card-content">
                         <p>{Title}</p>
                     </div>
                     <div className="card-action flex-space-bet">
-                        <div>{Type}</div>
-                        <div>{Year}</div>
+                        <div className='right'>{Type}</div>
+                        <div className='left'>{Year}</div>
                     </div>
                 </div>
-            </div>
         </>
     )
 }

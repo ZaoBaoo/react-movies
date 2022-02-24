@@ -1,27 +1,50 @@
 import React from 'react';
 import Movies from '../components/Movies';
+import Search from '../components/Search';
+import Preloader from '../components/Preloader';
+import RadioBtn from '../components/RadioBtn';
+
 
 class Main extends React.Component {
     state = {
-        DBMovies: []
+        DBMovies: [],
+        typeFilter: '',
+        loading: false
     }
 
-    componentDidMount() {
-        fetch('http://www.omdbapi.com/?apikey=f898f5b9&s=matrix')
+    // componentDidMount() {
+    //     this.getDBMovies()
+    // }
+
+    getDBMovies = async (film) => {
+        this.setState({loading: true})
+        if(film) {
+            await fetch(`http://www.omdbapi.com/?apikey=f898f5b9&s=${film}&type=${this.state.typeFilter}`)
             .then(response => response.json())
-            .then(data => this.setState({DBMovies: data.Search}))
+            .then(data => {             
+                this.setState({DBMovies: data.Search})
+            })
+        }
+        this.setState({loading: false})
+    }
+
+    setFilter = (type) => {
+        this.setState({typeFilter: type})
     }
 
     // Render =================================
     render() {
-        const { DBMovies } = this.state;
+        const { DBMovies, loading } = this.state;
         return (
             <main className='container content'>
-                {DBMovies.length ?
-                (<Movies DBMovies={DBMovies} />) :
-                <h3>Loading...</h3>
-                }
-                
+                <Search getDBMovies={this.getDBMovies} />
+                <RadioBtn setFilter={this.setFilter}/> 
+                {
+                    loading ?
+                    <Preloader /> :
+                    (<Movies DBMovies={DBMovies} />) 
+                    
+                }         
             </main>
         )
     }

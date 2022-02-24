@@ -16,11 +16,26 @@ nav {
   padding: 1.5rem 0;
 }
 
-.flex-space-bet {
-  display: flex;
-  justify-content: space-between;
+.img-max-size {
+  max-height: 400px;
 }
 
-.max-height-img {
-  height: 450px;
+.movies {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.search-btn {
+  position: absolute;
+  top: 0;
+  right: 0.65rem;
+}
+
+.margin-right {
+  margin-right: 50px;
+}
+
+.margin-bottom {
+  margin-bottom: 30px;
 }
