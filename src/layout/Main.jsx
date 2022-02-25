@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Movies from "../components/Movies";
 import Search from "../components/Search";
 import Preloader from "../components/Preloader";
@@ -6,43 +6,39 @@ import RadioBtn from "../components/RadioBtn";
 
 const API_KEY = process.env.REACT_APP_API_KEY;
 
-class Main extends React.Component {
-  state = {
-    DBMovies: [],
-    typeFilter: "",
-    loading: false,
-  };
+const Main = () => {
+  const [DBMovies, setDBMovies] = useState([]);
+  const [typeFilter, setTypeFilter] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  getDBMovies = async (film) => {
-    this.setState({ loading: true });
+  const getDBMovies = async (film) => {
+    setLoading(true);
     if (film) {
-      //   debugger;
       await fetch(
-        `https://www.omdbapi.com/?apikey=${API_KEY}&s=${film}&type=${this.state.typeFilter}`
+        `https://www.omdbapi.com/?apikey=${API_KEY}&s=${film}&type=${typeFilter}`
       )
         .then((response) => response.json())
-        .then((data) => {
-          this.setState({ DBMovies: data.Search });
-        });
-      //   debugger;
+        .then((data) => setDBMovies(data.Search))
+        .catch((err) => console.log(err));
     }
-    this.setState({ loading: false });
+    setLoading(false);
   };
 
-  setFilter = (type) => {
-    this.setState({ typeFilter: type });
+  const setFilter = (type) => {
+    setTypeFilter(type);
   };
 
-  // Render =================================
-  render() {
-    const { DBMovies, loading } = this.state;
-    return (
-      <main className="container content">
-        <Search getDBMovies={this.getDBMovies} />
-        <RadioBtn setFilter={this.setFilter} />
-        {loading ? <Preloader /> : <Movies DBMovies={DBMovies} />}
-      </main>
-    );
-  }
-}
+  // useEffect(() => {
+  //   getDBMovies();
+  // }, []);
+
+  // ==========================================
+  return (
+    <main className="container content">
+      <Search getDBMovies={getDBMovies} />
+      <RadioBtn setFilter={setFilter} />
+      {loading ? <Preloader /> : <Movies DBMovies={DBMovies} />}
+    </main>
+  );
+};
 export { Main };

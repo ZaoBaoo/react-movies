@@ -1,38 +1,38 @@
-import React from 'react';
+import React, { useState } from "react";
 
-class Search extends React.Component {
-    state = {
-        search: ''
-    }
+const Search = (props) => {
+  const { getDBMovies = Function.prototype } = props;
 
-    handleKey = (e) => {
-        if(e.code === 'Enter' && this.state.search !== '') {
-            this.props.getDBMovies(this.state.search)
-        }
-    }
+  const [search, setSearch] = useState("");
 
-    render() {
-        return (
-            <div className="row">
-                <div className="input-field col s12">
-                    <input
-                        placeholder='search'
-                        type="search"
-                        className="validate"
-                        value={this.state.search}
-                        onChange={(e) => {this.setState({search: e.target.value})}}
-                        onKeyDown={this.handleKey}
-                    />
-                    <button 
-                        className="waves-effect waves-light btn search-btn"
-                        onClick={() => this.props.getDBMovies(this.state.search)}
-                    >
-                    search
-                    </button>
-                </div>
-            </div>
-        )
+  const handleKey = (e) => {
+    if (e.code === "Enter" && search !== "") {
+      getDBMovies(search);
     }
-}
+  };
+
+  return (
+    <div className="row">
+      <div className="input-field col s12">
+        <input
+          placeholder="search"
+          type="search"
+          className="validate"
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+          }}
+          onKeyDown={handleKey}
+        />
+        <button
+          className="waves-effect waves-light btn search-btn"
+          onClick={() => getDBMovies(search)}
+        >
+          search
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default Search;

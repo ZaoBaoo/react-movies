@@ -1,55 +1,52 @@
-import React from "react";
+import React, { useState } from "react";
 
-class RadioBtn extends React.Component {
-  state = {
-    type: "",
+const RadioBtn = (props) => {
+  const { setFilter } = props;
+
+  const [type, setType] = useState("");
+
+  const handleRadio = (e) => {
+    setType(e.target.value);
+    setFilter(e.target.value);
   };
 
-  handleRadio = (e) => {
-    this.setState({ type: e.target.value });
-    this.props.setFilter(e.target.value);
-  };
-
-  render() {
-    const { type } = this.state;
-    return (
-      <form className="margin-bottom" action="!#">
-        {/* Btn 1 */}
-        <label className="margin-right">
-          <input
-            name="group1"
-            type="radio"
-            value=""
-            onChange={this.handleRadio}
-            checked={type === ""}
-          />
-          <span>All</span>
-        </label>
-        {/* Btn 2 */}
-        <label className="margin-right">
-          <input
-            name="group1"
-            type="radio"
-            value="movie"
-            onChange={this.handleRadio}
-            checked={type === "movie"}
-          />
-          <span>Films</span>
-        </label>
-        {/* Btn 3 */}
-        <label className="margin-right">
-          <input
-            name="group1"
-            type="radio"
-            value="series"
-            onChange={this.handleRadio}
-            checked={type === "series"}
-          />
-          <span>Series</span>
-        </label>
-      </form>
-    );
-  }
-}
+  return (
+    <form className="margin-bottom" action="!#">
+      {/* Btn 1 */}
+      <label className="margin-right">
+        <input
+          name="group1"
+          type="radio"
+          value=""
+          onChange={handleRadio}
+          checked={type === ""}
+        />
+        <span>All</span>
+      </label>
+      {/* Btn 2 */}
+      <label className="margin-right">
+        <input
+          name="group1"
+          type="radio"
+          value="movie"
+          onChange={handleRadio}
+          checked={type === "movie"}
+        />
+        <span>Films</span>
+      </label>
+      {/* Btn 3 */}
+      <label className="margin-right">
+        <input
+          name="group1"
+          type="radio"
+          value="series"
+          onChange={handleRadio}
+          checked={type === "series"}
+        />
+        <span>Series</span>
+      </label>
+    </form>
+  );
+};
 
 export default RadioBtn;
